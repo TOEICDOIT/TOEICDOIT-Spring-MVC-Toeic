@@ -1,10 +1,8 @@
-package site.toeicdoit.toeic.model;
+package site.toeicdoit.toeic.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import site.toeicdoit.toeic.common.model.BaseEntity;
 
-import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -12,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity(name = "toeics")
 @ToString(exclude = {"id"})
-public class ToeicModel extends BaseEntity {
+public class ToeicModel extends BaseModel {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -27,10 +25,6 @@ public class ToeicModel extends BaseEntity {
     private String script; // 정답 음원
     private String title; // 기출제목
     private boolean take; // 사용자가 풀었는지 여부
-
-
-
-
 
 
 }

@@ -1,16 +1,10 @@
-package site.toeicdoit.toeic;
+package site.toeicdoit.toeic.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Locale;
-
-import static java.time.format.DateTimeFormatter.ofPattern;
 
 @RestController
 public class HomeController {

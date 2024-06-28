@@ -1,11 +1,9 @@
-package site.toeicdoit.toeic.model;
+package site.toeicdoit.toeic.domain.model;
 
 
 import jakarta.persistence.*;
 import lombok.*;
-import site.toeicdoit.toeic.common.model.BaseEntity;
 
-import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -13,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity(name = "results")
 @ToString(exclude = {"id"})
-public class ResultModel extends BaseEntity {
+public class ResultModel extends BaseModel {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

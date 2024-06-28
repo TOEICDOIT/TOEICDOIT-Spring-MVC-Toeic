@@ -1,5 +1,4 @@
-package site.toeicdoit.toeic.common.model;
-
+package site.toeicdoit.toeic.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -8,21 +7,19 @@ import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Getter
-public class BaseEntity {
+public abstract class BaseModel {
 
     @CreatedDate
-    @Column(name = "reg_date", updatable = false)
-    private LocalDateTime regDate;
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "mod_date")
-    private LocalDateTime modDate;
-
+    @Column(name = "update_at")
+    private LocalDateTime updateAt;
 
 }

@@ -1,8 +1,7 @@
-package site.toeicdoit.toeic.model;
+package site.toeicdoit.toeic.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import site.toeicdoit.toeic.common.model.BaseEntity;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -11,7 +10,7 @@ import site.toeicdoit.toeic.common.model.BaseEntity;
 @Getter
 @Entity(name = "options")
 @ToString(exclude = {"id"})
-public class OptionModel extends BaseEntity {
+public class OptionModel extends BaseModel {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
