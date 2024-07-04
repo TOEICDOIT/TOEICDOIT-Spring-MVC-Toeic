@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Getter
-@Entity(name = "options")
+@Entity
 @ToString(exclude = {"id"})
 public class OptionModel extends BaseModel {
     @Id
@@ -20,6 +20,8 @@ public class OptionModel extends BaseModel {
     private String choice3;
     private String choice4;
 
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "toeic_id")
+    private ToeicModel toeciId;
 
 }

@@ -4,31 +4,28 @@ package site.toeicdoit.toeic.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-
+@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 @Getter
-@Entity(name = "results")
 @ToString(exclude = {"id"})
-public class ResultModel extends BaseModel {
+public class CalendarModel extends BaseModel {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String userAnswer;
-    private boolean isCorrect;
+    private String title;
+    private boolean allDay;
+    @Setter
+    private String start;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserModel userId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "toeic_id")
-    private ToeicModel toeicId;
-
-
 }
