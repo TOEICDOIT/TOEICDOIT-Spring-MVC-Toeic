@@ -1,10 +1,14 @@
-package site.toeicdoit.toeic.domain.model;
-
-import jakarta.persistence.*;
-import lombok.*;
+package site.toeicdoit.toeic.domain.model.mysql;
 
 import java.util.List;
 
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -31,6 +35,6 @@ public class ToeicModel extends BaseModel {
     @OneToMany(mappedBy = "toeicId", fetch = FetchType.LAZY)
     private List<ResultModel> resultIds;
 
-    @OneToMany(mappedBy = "toeicId", fetch = FetchType.LAZY)
-    private List<OptionModel> optionIds;
+    @OneToOne(mappedBy = "toeicId", fetch = FetchType.LAZY)
+    private OptionModel optionId;
 }

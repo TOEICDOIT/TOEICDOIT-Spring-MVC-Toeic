@@ -1,8 +1,9 @@
-package site.toeicdoit.toeic.domain.model;
+package site.toeicdoit.toeic.domain.model.mysql;
 
 
 import jakarta.persistence.*;
 import lombok.*;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,7 +23,6 @@ public class SubscribeModel extends BaseModel {
     private Boolean subscribeState;
     @Setter
     private LocalDateTime endDate;
-    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

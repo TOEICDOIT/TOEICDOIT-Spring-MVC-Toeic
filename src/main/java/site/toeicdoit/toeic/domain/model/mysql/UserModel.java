@@ -1,4 +1,4 @@
-package site.toeicdoit.toeic.domain.model;
+package site.toeicdoit.toeic.domain.model.mysql;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,10 +11,10 @@ import java.util.List;
 @Builder
 @Getter
 @ToString(exclude = {"id"})
-public class UserModel extends BaseModel {
+public class UserModel extends BaseModel{
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name ="id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -27,33 +27,31 @@ public class UserModel extends BaseModel {
     private String phone;
     private Integer toeicLevel;
     private String registration;
+    private Long oauthId;
 
-
+    
     // ====================== user ========================
 
     @Setter
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
-    private List<RoleModel> roleModels;
+    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RoleModel> roleIds;
 
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BoardModel> boardModels;
+    private List<BoardModel> boardIds;
 
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReplyModel> replyModels;
+    private List<ReplyModel> replyIds;
 
     // ======================= tx =========================
 
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private List<PaymentModel> paymentIds;
-
+    
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private List<SubscribeModel> subscribeIds;
 
     @OneToOne(mappedBy = "userId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private CalendarModel calenderId;
+    private CalendarModel calendarId;
 
-    // ======================= toeic =========================
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
-    private List<ResultModel> resultIds;
-
+    
 }

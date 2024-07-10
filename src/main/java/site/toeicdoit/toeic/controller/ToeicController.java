@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import site.toeicdoit.toeic.domain.model.ToeicModel;
-import site.toeicdoit.toeic.service.ToeicService;
+
+import site.toeicdoit.toeic.domain.model.mysql.ToeicModel;
 import site.toeicdoit.toeic.service.ToeicServiceImp;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")

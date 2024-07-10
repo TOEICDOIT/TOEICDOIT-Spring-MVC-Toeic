@@ -1,4 +1,6 @@
-package site.toeicdoit.toeic.domain.model;
+package site.toeicdoit.toeic.domain.model.mysql;
+
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,6 +25,6 @@ public class BoardModel extends BaseModel {
     @JoinColumn(name = "user_id")
     private UserModel userId;
 
-    @OneToOne(mappedBy = "boardId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private ReplyModel replyId;
+    @OneToMany(mappedBy = "boardId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReplyModel> replyIds;
 }

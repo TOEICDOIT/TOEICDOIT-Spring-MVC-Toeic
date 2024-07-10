@@ -1,4 +1,4 @@
-package site.toeicdoit.toeic.domain.model;
+package site.toeicdoit.toeic.domain.model.mysql;
 
 
 import jakarta.persistence.*;
@@ -18,9 +18,9 @@ public class CalendarModel extends BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private boolean allDay;
+    private boolean isAllDay;
+
     @Setter
-    private String start;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 

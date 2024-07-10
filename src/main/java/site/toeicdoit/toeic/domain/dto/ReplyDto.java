@@ -1,5 +1,6 @@
 package site.toeicdoit.toeic.domain.dto;
 
+
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -10,15 +11,8 @@ import org.springframework.stereotype.Component;
 @Setter
 @Data
 @Builder
-public class OptionDto {
-
+public class ReplyDto {
     private Long id;
-    private String choice1;
-    private String choice2;
-    private String choice3;
-    private String choice4;
-
-    private String createdAt;
-    private String updatedAt;
-
+    private String content;
+    private String writer;
 }

@@ -1,8 +1,9 @@
-package site.toeicdoit.toeic.domain.model;
+package site.toeicdoit.toeic.domain.model.mysql;
 
 import jakarta.persistence.*;
 import lombok.*;
 import site.toeicdoit.toeic.domain.vo.PaymentStatus;
+
 
 import java.time.LocalDateTime;
 
