@@ -28,8 +28,10 @@ public class ToeicModel extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "toeicCategory_id")
+    @JsonBackReference
     private ToeicCategoryModel toeicCategoryId;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "toeicId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private OptionModel optionId;
 }

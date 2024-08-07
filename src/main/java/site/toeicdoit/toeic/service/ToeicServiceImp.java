@@ -22,6 +22,13 @@ public class ToeicServiceImp implements ToeicService{
     public List<ToeicCategoryModel> getAllToeicCategory() {
         return toeicRepository.findAllToeicCategory();
     }
+    public List<ToeicCategoryModel> getAllToeicCategoryByLevel() {
+        return toeicRepository.findAllToeicCategoryByLevel();
+    }
+
+    public List<ToeicCategoryModel> getAllToeicCategoryByTest() {
+        return toeicRepository.findAllToeicCategoryByTest();
+    }
 }
 
 

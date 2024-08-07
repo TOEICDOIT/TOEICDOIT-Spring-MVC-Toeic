@@ -16,5 +16,11 @@ public interface ToeicRepository extends JpaRepository<ToeicCategoryModel, Long>
 
     @Query("select tcm FROM ToeicCategoryModel tcm where tcm.testType= 'exam'")
     List<ToeicCategoryModel> findAllToeicCategory();
+
+    @Query("select tcm FROM ToeicCategoryModel tcm where tcm.testType= 'level'")
+    List<ToeicCategoryModel> findAllToeicCategoryByLevel();
+
+    @Query("select tcm FROM ToeicCategoryModel tcm where tcm.testType= 'test'")
+    List<ToeicCategoryModel> findAllToeicCategoryByTest();
 }
 

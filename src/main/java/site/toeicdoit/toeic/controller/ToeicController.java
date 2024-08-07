@@ -29,5 +29,13 @@ public class ToeicController {
     public List<ToeicCategoryModel> getAllToeicCategory() {
         return toeicService.getAllToeicCategory();
     }
+    @GetMapping("/all/level")
+    public List<ToeicCategoryModel> getAllToeicCategoryByLevel() {
+        return toeicService.getAllToeicCategoryByLevel();
+    }
+    @GetMapping("/all/test")
+    public List<ToeicCategoryModel> getAllToeicCategoryByTest() {
+        return toeicService.getAllToeicCategoryByTest();
+    }
 
 }

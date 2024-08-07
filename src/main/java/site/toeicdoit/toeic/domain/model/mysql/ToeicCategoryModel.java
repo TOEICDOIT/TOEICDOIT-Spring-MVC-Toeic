@@ -1,5 +1,6 @@
 package site.toeicdoit.toeic.domain.model.mysql;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
