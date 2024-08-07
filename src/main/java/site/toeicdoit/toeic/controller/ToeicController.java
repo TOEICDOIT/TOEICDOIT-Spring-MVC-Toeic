@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import site.toeicdoit.toeic.domain.model.mysql.ToeicCategoryModel;
 import site.toeicdoit.toeic.domain.model.mysql.ToeicModel;
 import site.toeicdoit.toeic.service.ToeicServiceImp;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
@@ -18,12 +21,13 @@ import site.toeicdoit.toeic.service.ToeicServiceImp;
 @RestController
 public class ToeicController {
 
-    private ToeicServiceImp toeicService;
+    private final ToeicServiceImp toeicService;
 
-    @GetMapping("/random")
-    public ToeicModel getRandomQuiz() {
-        return toeicService.getRandomQuiz();
+
+
+    @GetMapping("/all")
+    public List<ToeicCategoryModel> getAllToeicCategory() {
+        return toeicService.getAllToeicCategory();
     }
-
 
 }

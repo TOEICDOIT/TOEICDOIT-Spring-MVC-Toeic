@@ -1,5 +1,6 @@
 package site.toeicdoit.toeic.domain.model.mysql;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +9,7 @@ import lombok.*;
 @Builder
 @Getter
 @Entity
-@ToString(exclude = {"id"})
+@ToString(exclude = "id")
 public class OptionModel extends BaseModel {
     @Id
     @Column(name = "id", nullable = false)
