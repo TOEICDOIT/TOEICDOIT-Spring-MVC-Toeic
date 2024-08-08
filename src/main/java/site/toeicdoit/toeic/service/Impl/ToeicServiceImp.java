@@ -2,6 +2,8 @@ package site.toeicdoit.toeic.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import site.toeicdoit.toeic.domain.model.mysql.ToeicCategoryModel;
 import site.toeicdoit.toeic.domain.model.mysql.ToeicModel;
@@ -34,6 +36,10 @@ public class ToeicServiceImp implements ToeicService{
 
     public List<ToeicCategoryModel> findByPart(String part) {
         return toeicRepository.findAllByPart(part);
+    }
+
+    public Page<String> findTitleByExam(Pageable pageable) {
+        return toeicRepository.findTitleByExam(pageable);
     }
 }
 
