@@ -3,10 +3,7 @@ package site.toeicdoit.toeic.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import site.toeicdoit.toeic.domain.model.mysql.ToeicCategoryModel;
 import site.toeicdoit.toeic.domain.model.mysql.ToeicModel;
@@ -25,17 +22,21 @@ public class ToeicController {
 
 
 
-    @GetMapping("/all")
+    @GetMapping("/exam")
     public List<ToeicCategoryModel> getAllToeicCategory() {
         return toeicService.getAllToeicCategory();
     }
-    @GetMapping("/all/level")
-    public List<ToeicCategoryModel> getAllToeicCategoryByLevel() {
-        return toeicService.getAllToeicCategoryByLevel();
-    }
-    @GetMapping("/all/test")
+    @GetMapping("/test")
     public List<ToeicCategoryModel> getAllToeicCategoryByTest() {
         return toeicService.getAllToeicCategoryByTest();
     }
 
+    @GetMapping("/level/{level}")
+    public List<ToeicCategoryModel> findByLevel(@PathVariable Long level) {
+        return toeicService.findByLevel(level);
+    }
+    @GetMapping("/part/{part}")
+    public List<ToeicCategoryModel> findByPart(@PathVariable String part) {
+        return toeicService.findByPart(part);
+    }
 }
