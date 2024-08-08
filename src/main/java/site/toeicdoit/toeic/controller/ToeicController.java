@@ -9,9 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import site.toeicdoit.toeic.domain.dto.ResultDto;
 import site.toeicdoit.toeic.domain.model.mysql.ToeicCategoryModel;
 import site.toeicdoit.toeic.domain.vo.Messenger;
-import site.toeicdoit.toeic.service.Impl.ToeicServiceImp;
+import site.toeicdoit.toeic.service.Impl.ResultServiceImpl;
+import site.toeicdoit.toeic.service.Impl.ToeicServiceImpl;
 
 import java.util.List;
 
@@ -22,7 +24,8 @@ import java.util.List;
 @RestController
 public class ToeicController {
 
-    private final ToeicServiceImp toeicService;
+    private final ToeicServiceImpl toeicService;
+    private final ResultServiceImpl resultService;
 
     @GetMapping("/exam")
     public List<ToeicCategoryModel> getAllToeicCategory() {
@@ -50,6 +53,12 @@ public class ToeicController {
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return toeicService.findTitleByExam(pageable);
+    }
+
+    @PostMapping("/exam/save")
+    public ResponseEntity<Messenger> saveResult(@RequestBody ResultDto resultDto) {
+        Messenger response = resultService.save(resultDto);
+        return ResponseEntity.ok(response);
     }
 
 }

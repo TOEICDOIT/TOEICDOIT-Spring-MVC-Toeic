@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @Transactional
 @RequiredArgsConstructor
-public class ToeicServiceImp implements ToeicService {
+public class ToeicServiceImpl implements ToeicService {
 
     private final ToeicRepository toeicRepository;
 

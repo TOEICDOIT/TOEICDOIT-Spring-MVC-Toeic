@@ -1096,7 +1096,7 @@ INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, descript
 VALUES (172,1, 'Where did Ms. Silva and Ms. ONeill meet?', 'B', '7',
         '내용 이해||Gina Silva와 Gloria O Neill은 파리에서 열린 패션 박람회에서 만났다. 따라서 정답은 (B) At clothing exhibition이다.
             (A) At a store opening는 매장 개업식에서 (C) At a holiday sale는 휴일 세일에서.', '5 ',  0 ,
-        'htt[s://kr.object.ncloudstorage.com/toeicdoit/part7-172-175.png ',  NOW(), NOW() );
+        'https://kr.object.ncloudstorage.com/toeicdoit/part7-172-175.png ',  NOW(), NOW() );
 
 
 INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, description, level, take, image, created_at, updated_at)
@@ -1252,14 +1252,14 @@ VALUES (197,1, 'Why did Mr. Brody write the e-mail?', 'D', '7',
 
 INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, description, level, take, image, created_at, updated_at)
 VALUES (198,1, 'What is the purpose of the advertisement?', 'C', '7', '내용 이해||광고의 목적은 소매점의 개점을 알리는 것이다. 따라서 정답은 (C) To announce a grand opening for a retail outlet이다. ',
-        3 , 0, 'htt[s://kr.object.ncloudstorage.com/toeicdoit/part7-196-200.png ',
+        3 , 0, 'https://kr.object.ncloudstorage.com/toeicdoit/part7-196-200.png ',
         NOW(), NOW());
 
 
 INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, description, level, take, image, created_at, updated_at)
 VALUES (199,1, 'What can guests do at Woodward Customs’ store on April 29?', 'C ', '7 ',
         ' 내용 이해||Woodward Customs의 매장에서 4월 29일에 손님들이 할 수 있는 일은 상품을 위한 경연에 참여하는 것이다.따라서 정답은 (C) Participate in a contest for a prize이다.(A) Meet with local craftspeople는 지역 공예가를 만나다,
-      ', 8, 0, 'htt[s://kr.object.ncloudstorage.com/toeicdoit/part7-196-200.png ', NOW(),
+      ', 8, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/part7-196-200.png ', NOW(),
         NOW());
 
 
