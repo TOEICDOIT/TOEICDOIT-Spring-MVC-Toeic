@@ -32,6 +32,6 @@ public class ToeicModel extends BaseModel {
     private ToeicCategoryModel toeicCategoryId;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "toeicId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+
     private OptionModel optionId;
 }

@@ -39,3 +39,16 @@ out/
 .env
 application.yml
 
+# .gitignore
+
+# MySQL 소켓 파일 무시
+mysql/demo/var/lib/mysql/*.sock
+mysql/demo/var/lib/mysql/*.pid
+
+# MySQL 데이터 디렉토리 무시
+mysql/demo/var/lib/mysql/
+
+# 기타 무시할 파일들 추가
+*.log
+*.tmp
+

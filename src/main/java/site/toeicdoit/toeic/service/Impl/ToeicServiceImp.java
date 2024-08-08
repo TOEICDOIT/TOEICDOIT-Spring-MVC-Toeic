@@ -1,30 +1,24 @@
-package site.toeicdoit.toeic.service;
+package site.toeicdoit.toeic.service.Impl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import site.toeicdoit.toeic.domain.model.mysql.ToeicCategoryModel;
-import site.toeicdoit.toeic.domain.model.mysql.ToeicModel;
 import site.toeicdoit.toeic.repository.ToeicRepository;
+import site.toeicdoit.toeic.service.ToeicService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@Log4j2
+@Slf4j
+@Transactional
 @RequiredArgsConstructor
-public class ToeicServiceImp implements ToeicService{
-
+public class ToeicServiceImp implements ToeicService {
 
     private final ToeicRepository toeicRepository;
-
-
-    public List<ToeicCategoryModel> getAllToeicCategory() {
-        return toeicRepository.findAllByExam();
-    }
-
 
     public List<ToeicCategoryModel> getAllToeicCategoryByTest() {
         return toeicRepository.findAllByTest();
@@ -41,6 +35,11 @@ public class ToeicServiceImp implements ToeicService{
     public Page<String> findTitleByExam(Pageable pageable) {
         return toeicRepository.findTitleByExam(pageable);
     }
+
+    public List<ToeicCategoryModel> getAllToeicCategory() {
+        return toeicRepository.findAllByExam();
+    }
+
 }
 
 

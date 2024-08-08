@@ -1,4 +1,4 @@
-package site.toeicdoit.user.service;
+package site.toeicdoit.toeic.service;
 
 import java.util.List;
 import java.util.Optional;

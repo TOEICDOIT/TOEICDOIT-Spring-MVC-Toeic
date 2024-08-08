@@ -1,6 +1,7 @@
-package site.toeicdoit.user.service;
+package site.toeicdoit.toeic.service;
 
-import site.toeicdoit.user.domain.vo.Messenger;
+
+import site.toeicdoit.toeic.domain.vo.Messenger;
 
 public interface CommandService<T> {
     Messenger save(T t);

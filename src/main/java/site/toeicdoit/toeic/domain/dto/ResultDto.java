@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class ResultDto {
 
     private Long id;
-    private String userAnser;
+    private String userAnswer;
     private String isCorrect;
     private String timeElapsed;
     private String score;

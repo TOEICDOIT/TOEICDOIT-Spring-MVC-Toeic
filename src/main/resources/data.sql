@@ -1866,13 +1866,13 @@ VALUES (495,4, 'The word serves in paragraph 2 line 8 is closest in meaning to '
 INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, description, level, take, image, created_at, updated_at)
 VALUES (496,4, 'What is true about the opening ceremony on August 10? ', 'C', '7', '내용 이해||존 C. 메이슨이 아내와 아들들의 개회사가 있다고 했으므로 (C)가 정답이다. ||존 C. 메이슨의 유가족이 아내와 자식들이라는 내용은 앞에 나온다.', 8, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-5.png', NOW(), NOW());
 INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, description, level, take, image, created_at, updated_at)
-VALUES (497,4, 'Who is Mr. Drake?', 'C', '7', '', 9, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-6.png', NOW(), NOW());
+VALUES (497,4, 'Who is Mr. Drake?', 'C', '7', '내용 이해|| 멜브룩 꽃 원예 협회에 지속적인 후원을 하며 회비를 낸다고 했으므로 (C)가 정답이다. ||단서의 the Melbrooke Flower and Horticultural Society가 정답에서 a community group으로 표현되었다.', 9, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-6.png', NOW(), NOW());
 INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, description, level, take, image, created_at, updated_at)
-VALUES (498,4, 'What did Melbrooke Community College students do this year?', 'C', '7', '', 9, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-6.png', NOW(), NOW());
+VALUES (498,4, 'What did Melbrooke Community College students do this year?', 'C', '7', '내용 이해||멜브룩 전문 대학 학생들이 새로운 딱정벌레를 발견했다고 했으므로 (C)가 정답이다. ||단서의 a new subspecies of beetle이 정답에서 a new type of insect로 표현되었다.', 9, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-6.png', NOW(), NOW());
 INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, description, level, take, image, created_at, updated_at)
-VALUES (499,4, 'Where can patrons learn more about conference tickets?', 'A', '7', '', 9, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-6.png', NOW(), NOW());
+VALUES (499,4, 'Where can patrons learn more about conference tickets?', 'A', '7', '내용 이해||표에 대한 세부 사항들이 소식지 12월 호에 나올 것이고, 11월에 보낸 편지에서 언급했으므로 (A)가 정답이다.', 9, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-6.png', NOW(), NOW());
 INSERT INTO toeic_model (id, toeic_category_id, question, answer, part, description, level, take, image, created_at, updated_at)
-VALUES (500,4, 'According to the letter what will be different about the next meeting? ', 'D', '7', '', 9, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-6.pn', NOW(), NOW());
+VALUES (500,4, 'According to the letter what will be different about the next meeting? ', 'D', '7', '내용 이해||다른 행사 때문에 장소가 바뀌었다고 했으므로 (D)가 정답이다.', 9, 0, 'https://kr.object.ncloudstorage.com/toeicdoit/%EB%A0%88%EB%B2%A8%EB%B3%84/part7-6.pn', NOW(), NOW());
 
 INSERT INTO option_model (id, toeic_id, choice1, choice2, choice3, choice4, created_at, updated_at)
 VALUES (1,1 ,'(A)', '(B)', '(C)', '(D)', NOW(), NOW());
