@@ -11,52 +11,52 @@ import site.toeicdoit.toeic.domain.vo.Messenger;
 
 public interface ToeicService {
 
-//    default ToeicModel dtoToEntity(ToeicDto dto) {
-//        return ToeicModel.builder()
-//                .id(dto.getId())
-//                .level(dto.getLevel())
-//                .part(dto.getPart())
-//                .question(dto.getQuestion())
-//                .answer(dto.getAnswer())
-//                .image(dto.getImage())
-//                .description(dto.getDescription())
-//                .take(dto.isTake())
-//                .build();
-//    }
-//
-//    default ToeicDto entityToDto(ToeicModel entity) {
-//        return ToeicDto.builder()
-//                .id(entity.getId())
-//                .level(entity.getLevel())
-//                .part(entity.getPart())
-//                .question(entity.getQuestion())
-//                .answer(entity.getAnswer())
-//                .image(entity.getImage())
-//                .description(entity.getDescription())
-//                .take(entity.isTake())
-//                .createdAt(entity.getCreatedAt().toString())
-//                .updatedAt(entity.getUpdatedAt().toString())
-//                .build();
-//    }
-//
-//    default ToeicCategoryModel dtoToEntity(ToeicCategoryDto dto) {
-//        return ToeicCategoryModel.builder()
-//                .id(dto.getId())
-//                .title(dto.getTitle())
-//                .sound(dto.getSound())
-//                .testType(dto.getTestType())
-//                .build();
-//    }
-//    default ToeicCategoryDto entityToDto(ToeicCategoryModel entity) {
-//        return ToeicCategoryDto.builder()
-//                .id(entity.getId())
-//                .title(entity.getTitle())
-//                .sound(entity.getSound())
-//                .testType(entity.getTestType())
-//                .createdAt(entity.getCreatedAt().toString())
-//                .updatedAt(entity.getUpdatedAt().toString())
-//                .build();
-//    }
+    default ToeicModel dtoToEntity(ToeicDto dto) {
+        return ToeicModel.builder()
+                .id(dto.getId())
+                .level(dto.getLevel())
+                .part(dto.getPart())
+                .question(dto.getQuestion())
+                .answer(dto.getAnswer())
+                .image(dto.getImage())
+                .description(dto.getDescription())
+
+                .build();
+    }
+
+    default ToeicDto entityToDto(ToeicModel entity) {
+        return ToeicDto.builder()
+                .id(entity.getId())
+                .level(entity.getLevel())
+                .part(entity.getPart())
+                .question(entity.getQuestion())
+                .answer(entity.getAnswer())
+                .image(entity.getImage())
+                .description(entity.getDescription())
+
+                .createdAt(entity.getCreatedAt().toString())
+                .updatedAt(entity.getUpdatedAt().toString())
+                .build();
+    }
+
+    default ToeicCategoryModel dtoToEntity(ToeicCategoryDto dto) {
+        return ToeicCategoryModel.builder()
+                .id(dto.getId())
+                .title(dto.getTitle())
+                .sound(dto.getSound())
+                .testType(dto.getTestType())
+                .build();
+    }
+    default ToeicCategoryDto entityToDto(ToeicCategoryModel entity) {
+        return ToeicCategoryDto.builder()
+                .id(entity.getId())
+                .title(entity.getTitle())
+                .sound(entity.getSound())
+                .testType(entity.getTestType())
+                .createdAt(entity.getCreatedAt().toString())
+                .updatedAt(entity.getUpdatedAt().toString())
+                .build();
+    }
 //    default OptionModel dtoToEntity(OptionDto dto) {
 //        return OptionModel.builder()
 //                .id(dto.getId())

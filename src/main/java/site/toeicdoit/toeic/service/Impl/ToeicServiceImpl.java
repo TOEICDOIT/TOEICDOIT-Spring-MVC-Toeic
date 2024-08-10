@@ -40,6 +40,10 @@ public class ToeicServiceImpl implements ToeicService {
         return toeicRepository.findAllByExam();
     }
 
+    public String findTitleById(Long id) {
+        return toeicRepository.findTitleById(id);
+    }
+
 }
 
 

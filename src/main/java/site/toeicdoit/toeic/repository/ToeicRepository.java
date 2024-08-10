@@ -27,6 +27,8 @@ public interface ToeicRepository extends JpaRepository<ToeicCategoryModel, Long>
     @Query("SELECT tcm.title FROM ToeicCategoryModel tcm WHERE tcm.testType = 'exam'")
     Page<String> findTitleByExam(Pageable pageable);
 
+    @Query("SELECT tm.answer FROM ToeicModel tm WHERE tm.id = :id")
+    String findTitleById(@Param("id") Long id);
 
 }
 

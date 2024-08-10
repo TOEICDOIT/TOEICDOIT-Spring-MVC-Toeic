@@ -28,5 +28,19 @@ public class ResultDto {
     private String createdAt;
     private String updatedAt;
 
-    private List<ResultDto> resultDtoList;
+    private List<ResultDataDto> data;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ResultDataDto {
+        private Long toeicId;
+        private String answer;
+
+        @Override
+        public String toString() {
+            return String.format("(toeicId=%d, answer=%s)", toeicId, answer);
+        }
+    }
+
 }
