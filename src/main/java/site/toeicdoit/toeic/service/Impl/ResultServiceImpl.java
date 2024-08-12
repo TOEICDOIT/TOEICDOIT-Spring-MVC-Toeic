@@ -18,11 +18,7 @@ import site.toeicdoit.toeic.repository.ToeicRepository;
 import site.toeicdoit.toeic.repository.UserRepository;
 import site.toeicdoit.toeic.service.ResultService;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -95,6 +91,13 @@ public class ResultServiceImpl implements ResultService {
 
             ResultModel resultModel = dtoToEntity(dto);
             resultModel.setUserId(userModel);
+            resultModel.setScorePart1(String.valueOf(scoreResult.part1Score));
+            resultModel.setScorePart2(String.valueOf(scoreResult.part2Score));
+            resultModel.setScorePart3(String.valueOf(scoreResult.part3Score));
+            resultModel.setScorePart4(String.valueOf(scoreResult.part4Score));
+            resultModel.setScorePart5(String.valueOf(scoreResult.part5Score));
+            resultModel.setScorePart6(String.valueOf(scoreResult.part6Score));
+            resultModel.setScorePart7(String.valueOf(scoreResult.part7Score));
             resultModel.setToeicCategoryId(toeicCategoryModel);
             resultModel.setScore(String.valueOf(scoreResult.getTotalScore()));
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
@@ -108,11 +111,14 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setUserAnswer(userAnswer);
             Optional<ResultModel> existingResult = resultRepository.findByUserIdAndToeicCategoryId(userModel, toeicCategoryModel);
 
+
             resultRepository.save(resultModel);
+
 
             return Messenger.builder()
                     .message("Successfully saved")
                     .state(true)
+                    .data(entityToDto(resultModel))
                     .build();
         } catch (RuntimeException e) {
             log.error("Runtime exception: ", e);
@@ -130,12 +136,37 @@ public class ResultServiceImpl implements ResultService {
         int totalScore = 0;
         int lcScore = 0;
         int rcScore = 0;
+        int part1Score = 0;
+        int part2Score = 0;
+        int part3Score = 0;
+        int part4Score = 0;
+        int part5Score = 0;
+        int part6Score = 0;
+        int part7Score = 0;
+
+
 
         for (ResultDto.ResultDataDto data : resultData) {
             Optional<ToeicModel> toeicModel = toeicRepository.findById(data.getToeicId());
             if (toeicModel.isPresent() && toeicModel.get().getAnswer().equals(data.getAnswer())) {
                 int score = 5; // 점수 계산 로직에 맞게 수정
                 totalScore += score;
+                if (data.getPart() == 1){
+                    part1Score += score;
+                } else if (data.getPart() == 2){
+                    part2Score += score;
+                } else if (data.getPart() == 3){
+                    part3Score += score;
+                } else if (data.getPart() == 4){
+                    part4Score += score;
+                } else if (data.getPart() == 5){
+                    part5Score += score;
+                } else if (data.getPart() == 6){
+                    part6Score += score;
+                } else if (data.getPart() == 7){
+                    part7Score += score;
+
+                }
 
                 if (data.getPart() >= 1 && data.getPart() <= 4) {
                     lcScore += score;
@@ -145,7 +176,7 @@ public class ResultServiceImpl implements ResultService {
             }
         }
 
-        return new ScoreResult(totalScore, lcScore, rcScore);
+        return new ScoreResult(totalScore, lcScore, rcScore , part1Score, part2Score, part3Score, part4Score, part5Score, part6Score, part7Score);
     }
     @Override
     public Messenger deleteById(Long id) {
@@ -204,11 +235,26 @@ public class ResultServiceImpl implements ResultService {
         private final int totalScore;
         private final int lcScore;
         private final int rcScore;
+        private final int part1Score;
+        private final int part2Score;
+        private final int part3Score;
+        private final int part4Score;
+        private final int part5Score;
+        private final int part6Score;
+        private final int part7Score;
 
-        public ScoreResult(int totalScore, int lcScore, int rcScore) {
+        public ScoreResult(int totalScore, int lcScore, int rcScore , int part1Score, int part2Score, int part3Score, int part4Score, int part5Score, int part6Score, int part7Score) {
             this.totalScore = totalScore;
             this.lcScore = lcScore;
             this.rcScore = rcScore;
+            this.part1Score = part1Score;
+            this.part2Score = part2Score;
+            this.part3Score = part3Score;
+            this.part4Score = part4Score;
+            this.part5Score = part5Score;
+            this.part6Score = part6Score;
+            this.part7Score = part7Score;
+
         }
 
         public int getTotalScore() {
@@ -222,5 +268,7 @@ public class ResultServiceImpl implements ResultService {
         public int getRcScore() {
             return rcScore;
         }
+
+
     }
 }
