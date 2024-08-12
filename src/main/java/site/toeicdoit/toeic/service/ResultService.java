@@ -39,6 +39,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .score(entity.getScore())
                 .rcScore(entity.getRcScore())
                 .lcScore(entity.getLcScore())
+
                 .scorePart1(entity.getScorePart1())
                 .scorePart2(entity.getScorePart2())
                 .scorePart3(entity.getScorePart3())

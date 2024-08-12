@@ -109,7 +109,10 @@ public class ResultServiceImpl implements ResultService {
                 userAnswer = userAnswer.substring(0, 255);
             }
             resultModel.setUserAnswer(userAnswer);
-            Optional<ResultModel> existingResult = resultRepository.findByUserIdAndToeicCategoryId(userModel, toeicCategoryModel);
+            Optional<ResultModel> existingResult = resultRepository.findByUserId_IdAndToeicCategoryId_IdAndId(
+                    userModel.getId(), toeicCategoryModel.getId(), resultModel.getId());
+
+
 
 
             resultRepository.save(resultModel);

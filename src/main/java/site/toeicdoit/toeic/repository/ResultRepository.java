@@ -21,5 +21,5 @@ public interface ResultRepository extends JpaRepository<ResultModel, Long> {
 //                                                            @Param("userAnswer") String userAnswer);
 
     Optional<ResultModel> findByUserIdAndToeicCategoryIdAndUserAnswer(UserModel userModel, ToeicCategoryModel toeicCategoryModel, String userAnswer);
-    Optional<ResultModel> findByUserIdAndToeicCategoryId(UserModel userId, ToeicCategoryModel toeicCategoryId);
+    Optional<ResultModel> findByUserId_IdAndToeicCategoryId_IdAndId(Long userId, Long toeicCategoryId, Long id);
 }
