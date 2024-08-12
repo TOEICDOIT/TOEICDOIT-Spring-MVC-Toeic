@@ -25,7 +25,8 @@ public class ResultModel extends BaseModel {
     private String rcScore; //rc점수
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private ToeicCategoryModel toeicCategoryId;
 
@@ -33,7 +34,7 @@ public class ResultModel extends BaseModel {
     @JoinColumn(name = "parent_id")
     private ResultModel parentId;
 
-    @OneToMany(mappedBy = "parentId", orphanRemoval = true)
+    @OneToMany(mappedBy = "parentId", fetch = FetchType.LAZY,cascade =  CascadeType.ALL, orphanRemoval = true)
     private List<ResultModel> childrenIds;
 
     @ManyToOne(fetch = FetchType.LAZY)

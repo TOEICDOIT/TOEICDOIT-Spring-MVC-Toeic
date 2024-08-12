@@ -49,4 +49,10 @@ public class ToeicController {
         Messenger response = resultService.save(resultDto);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/exam/uploadChunk")
+    public ResponseEntity<Messenger> uploadChunk(@RequestBody String jsonData, @RequestParam int chunkIndex, @RequestParam int totalChunks) {
+        Messenger response = resultService.saveChunk(jsonData, chunkIndex, totalChunks);
+        return ResponseEntity.ok(response);
+    }
 }

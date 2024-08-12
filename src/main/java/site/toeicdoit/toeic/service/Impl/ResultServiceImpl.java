@@ -1,5 +1,6 @@
 package site.toeicdoit.toeic.service.Impl;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,10 @@ import site.toeicdoit.toeic.repository.ToeicRepository;
 import site.toeicdoit.toeic.repository.UserRepository;
 import site.toeicdoit.toeic.service.ResultService;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,6 +36,38 @@ public class ResultServiceImpl implements ResultService {
     private final ToeicCategoryRepository toeicCategoryRepository;
     private final UserRepository userRepository;
     private final ToeicRepository toeicRepository;
+
+    private final Map<Integer, String> chunkStorage = new HashMap<>();
+    private int totalChunks = 0;
+
+    @Override
+    public Messenger saveChunk(String jsonData, int chunkIndex, int totalChunks) {
+        try {
+            chunkStorage.put(chunkIndex, jsonData);
+            this.totalChunks = totalChunks;
+
+            if (chunkStorage.size() == totalChunks) {
+                // 모든 청크가 도착했으면 전체 데이터를 재조립하고 저장
+                StringBuilder fullJsonData = new StringBuilder();
+                for (int i = 0; i < totalChunks; i++) {
+                    fullJsonData.append(chunkStorage.get(i));
+                }
+                chunkStorage.clear();
+                return saveFromJson(fullJsonData.toString());
+            } else {
+                return Messenger.builder()
+                        .message("Chunk received")
+                        .state(true)
+                        .build();
+            }
+        } catch (Exception e) {
+            log.error("Error processing chunk: ", e);
+            return Messenger.builder()
+                    .message("Error processing chunk")
+                    .state(false)
+                    .build();
+        }
+    }
 
     @Override
     public Messenger saveFromJson(String jsonData) {
@@ -63,6 +99,14 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setScore(String.valueOf(scoreResult.getTotalScore()));
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
+
+            // user_answer 길이 제한 및 null 체크
+            String userAnswer = dto.getUserAnswer();
+            if (userAnswer != null && userAnswer.length() > 255) {
+                userAnswer = userAnswer.substring(0, 255);
+            }
+            resultModel.setUserAnswer(userAnswer);
+            Optional<ResultModel> existingResult = resultRepository.findByUserIdAndToeicCategoryId(userModel, toeicCategoryModel);
 
             resultRepository.save(resultModel);
 
@@ -103,7 +147,6 @@ public class ResultServiceImpl implements ResultService {
 
         return new ScoreResult(totalScore, lcScore, rcScore);
     }
-
     @Override
     public Messenger deleteById(Long id) {
         try {
@@ -155,6 +198,7 @@ public class ResultServiceImpl implements ResultService {
     public Boolean existsById(Long id) {
         return resultRepository.existsById(id);
     }
+
 
     private static class ScoreResult {
         private final int totalScore;

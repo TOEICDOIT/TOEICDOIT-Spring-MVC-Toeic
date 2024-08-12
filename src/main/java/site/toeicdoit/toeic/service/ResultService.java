@@ -16,7 +16,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .collect(Collectors.joining(", ")); // 구분자로 ", " 사용
 
         return ResultModel.builder()
-                .id(dto.getId())
+
                 .timeElapsed(dto.getTimeElapsed())
                 .score(dto.getScore())
                 .rcScore(dto.getRcScore())
@@ -59,4 +59,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
     Optional<ResultDto> findById(Long id);
 
     Boolean existsById(Long id);
+
+
+    Messenger saveChunk(String jsonData, int chunkIndex, int totalChunks);
 }
