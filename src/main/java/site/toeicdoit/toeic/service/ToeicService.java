@@ -8,8 +8,10 @@ import site.toeicdoit.toeic.domain.model.mysql.ToeicCategoryModel;
 import site.toeicdoit.toeic.domain.model.mysql.ToeicModel;
 import site.toeicdoit.toeic.domain.vo.Messenger;
 
+import java.util.List;
 
-public interface ToeicService {
+
+public interface ToeicService extends QueryService<ToeicDto>, CommandService<ToeicDto> {
 
     default ToeicModel dtoToEntity(ToeicDto dto) {
         return ToeicModel.builder()
@@ -39,47 +41,30 @@ public interface ToeicService {
                 .build();
     }
 
-    default ToeicCategoryModel dtoToEntity(ToeicCategoryDto dto) {
-        return ToeicCategoryModel.builder()
-                .id(dto.getId())
-                .title(dto.getTitle())
-                .sound(dto.getSound())
-                .testType(dto.getTestType())
-                .build();
-    }
-    default ToeicCategoryDto entityToDto(ToeicCategoryModel entity) {
-        return ToeicCategoryDto.builder()
-                .id(entity.getId())
-                .title(entity.getTitle())
-                .sound(entity.getSound())
-                .testType(entity.getTestType())
-                .createdAt(entity.getCreatedAt().toString())
-                .updatedAt(entity.getUpdatedAt().toString())
-                .build();
-    }
-//    default OptionModel dtoToEntity(OptionDto dto) {
-//        return OptionModel.builder()
-//                .id(dto.getId())
-//                .choice1(dto.getChoice1())
-//                .choice2(dto.getChoice2())
-//                .choice3(dto.getChoice3())
-//                .choice4(dto.getChoice4())
-//                .build();
-//    }
-//    default OptionDto entityToDto(OptionModel entity) {
-//        return OptionDto.builder()
-//                .id(entity.getId())
-//                .choice1(entity.getChoice1())
-//                .choice2(entity.getChoice2())
-//                .choice3(entity.getChoice3())
-//                .choice4(entity.getChoice4())
-//                .build();
-//    }
 
-//    Messenger save(ToeicDto dto);
-//
-//
-//    List<ToeicDto> findAllByUserId(Long userId);
-//
-//    List<ToeicCategoryModel> findAllByexam();
+    default OptionModel dtoToEntity(OptionDto dto) {
+        return OptionModel.builder()
+                .id(dto.getId())
+                .choice1(dto.getChoice1())
+                .choice2(dto.getChoice2())
+                .choice3(dto.getChoice3())
+                .choice4(dto.getChoice4())
+                .build();
+    }
+    default OptionDto entityToDto(OptionModel entity) {
+        return OptionDto.builder()
+                .id(entity.getId())
+                .choice1(entity.getChoice1())
+                .choice2(entity.getChoice2())
+                .choice3(entity.getChoice3())
+                .choice4(entity.getChoice4())
+                .build();
+    }
+
+    Messenger save(ToeicDto dto);
+
+
+    List<ToeicDto> findAllByUserId(Long userId);
+
+
 }
