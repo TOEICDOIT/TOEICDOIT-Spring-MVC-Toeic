@@ -32,14 +32,12 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .build();
     }
 
-    // 엔티티를 DTO로 변환하는 메소드
     default ResultDto entityToDto(ResultModel entity) {
         return ResultDto.builder()
                 .id(entity.getId())
                 .score(entity.getScore())
                 .rcScore(entity.getRcScore())
                 .lcScore(entity.getLcScore())
-
                 .scorePart1(entity.getScorePart1())
                 .scorePart2(entity.getScorePart2())
                 .scorePart3(entity.getScorePart3())
@@ -52,6 +50,8 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .toeicCategoryId(entity.getToeicCategoryId() != null ? entity.getToeicCategoryId().getId() : null)
                 .userId(entity.getUserId() != null ? entity.getUserId().getId() : null)
                 .barData(List.of(entity.getScorePart1(), entity.getScorePart2(), entity.getScorePart3(), entity.getScorePart4(), entity.getScorePart5(), entity.getScorePart6(), entity.getScorePart7()))
+//                .createdAt(entity.getCreatedAt().toString())
+//                .updatedAt(entity.getUpdatedAt().toString())
                 .build();
     }
 
@@ -71,6 +71,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
 
     Boolean existsById(Long id);
 
-
     Messenger saveChunk(String jsonData, int chunkIndex, int totalChunks);
+
+    List<ResultDto> findByUserId(Long userId);
 }

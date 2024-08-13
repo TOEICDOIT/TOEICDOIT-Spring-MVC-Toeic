@@ -66,6 +66,13 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
+    public List<ResultDto> findByUserId(Long userId) {
+        return resultRepository.findByResultId(userId).stream()
+                .map(this::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Messenger saveFromJson(String jsonData) {
         try {
             ResultDto resultDto = objectMapper.readValue(jsonData, ResultDto.class);
@@ -113,8 +120,6 @@ public class ResultServiceImpl implements ResultService {
                     userModel.getId(), toeicCategoryModel.getId(), resultModel.getId());
 
 
-
-
             resultRepository.save(resultModel);
 
 
@@ -148,25 +153,24 @@ public class ResultServiceImpl implements ResultService {
         int part7Score = 0;
 
 
-
         for (ResultDto.ResultDataDto data : resultData) {
             Optional<ToeicModel> toeicModel = toeicRepository.findById(data.getToeicId());
             if (toeicModel.isPresent() && toeicModel.get().getAnswer().equals(data.getAnswer())) {
                 int score = 5; // 점수 계산 로직에 맞게 수정
                 totalScore += score;
-                if (data.getPart() == 1){
+                if (data.getPart() == 1) {
                     part1Score += score;
-                } else if (data.getPart() == 2){
+                } else if (data.getPart() == 2) {
                     part2Score += score;
-                } else if (data.getPart() == 3){
+                } else if (data.getPart() == 3) {
                     part3Score += score;
-                } else if (data.getPart() == 4){
+                } else if (data.getPart() == 4) {
                     part4Score += score;
-                } else if (data.getPart() == 5){
+                } else if (data.getPart() == 5) {
                     part5Score += score;
-                } else if (data.getPart() == 6){
+                } else if (data.getPart() == 6) {
                     part6Score += score;
-                } else if (data.getPart() == 7){
+                } else if (data.getPart() == 7) {
                     part7Score += score;
 
                 }
@@ -179,8 +183,9 @@ public class ResultServiceImpl implements ResultService {
             }
         }
 
-        return new ScoreResult(totalScore, lcScore, rcScore , part1Score, part2Score, part3Score, part4Score, part5Score, part6Score, part7Score);
+        return new ScoreResult(totalScore, lcScore, rcScore, part1Score, part2Score, part3Score, part4Score, part5Score, part6Score, part7Score);
     }
+
     @Override
     public Messenger deleteById(Long id) {
         try {
@@ -246,7 +251,7 @@ public class ResultServiceImpl implements ResultService {
         private final int part6Score;
         private final int part7Score;
 
-        public ScoreResult(int totalScore, int lcScore, int rcScore , int part1Score, int part2Score, int part3Score, int part4Score, int part5Score, int part6Score, int part7Score) {
+        public ScoreResult(int totalScore, int lcScore, int rcScore, int part1Score, int part2Score, int part3Score, int part4Score, int part5Score, int part6Score, int part7Score) {
             this.totalScore = totalScore;
             this.lcScore = lcScore;
             this.rcScore = rcScore;
@@ -274,4 +279,6 @@ public class ResultServiceImpl implements ResultService {
 
 
     }
+
+
 }

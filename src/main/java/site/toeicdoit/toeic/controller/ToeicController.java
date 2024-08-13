@@ -55,4 +55,9 @@ public class ToeicController {
         Messenger response = resultService.saveChunk(jsonData, chunkIndex, totalChunks);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/exam/user/{userId}")
+    public List<ResultDto> findAllByUserId(@PathVariable Long userId) {
+        return resultService.findByUserId(userId);
+    }
 }
