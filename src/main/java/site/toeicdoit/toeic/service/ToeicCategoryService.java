@@ -24,8 +24,6 @@ public interface ToeicCategoryService extends QueryService<ToeicCategoryDto>, Co
                 .sound(entity.getSound())
                 .testType(entity.getTestType())
                 .take(entity.isTake())
-                .createdAt(entity.getCreatedAt().toString())
-                .updatedAt(entity.getUpdatedAt().toString())
                 .build();
     }
 

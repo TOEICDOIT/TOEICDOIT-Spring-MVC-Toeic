@@ -1,10 +1,10 @@
 package site.toeicdoit.toeic.service;
 
 import site.toeicdoit.toeic.domain.dto.OptionDto;
-import site.toeicdoit.toeic.domain.dto.ToeicCategoryDto;
+
 import site.toeicdoit.toeic.domain.dto.ToeicDto;
 import site.toeicdoit.toeic.domain.model.mysql.OptionModel;
-import site.toeicdoit.toeic.domain.model.mysql.ToeicCategoryModel;
+
 import site.toeicdoit.toeic.domain.model.mysql.ToeicModel;
 import site.toeicdoit.toeic.domain.vo.Messenger;
 
@@ -22,7 +22,6 @@ public interface ToeicService extends QueryService<ToeicDto>, CommandService<Toe
                 .answer(dto.getAnswer())
                 .image(dto.getImage())
                 .description(dto.getDescription())
-
                 .build();
     }
 
@@ -35,9 +34,6 @@ public interface ToeicService extends QueryService<ToeicDto>, CommandService<Toe
                 .answer(entity.getAnswer())
                 .image(entity.getImage())
                 .description(entity.getDescription())
-
-                .createdAt(entity.getCreatedAt().toString())
-                .updatedAt(entity.getUpdatedAt().toString())
                 .build();
     }
 
@@ -51,6 +47,7 @@ public interface ToeicService extends QueryService<ToeicDto>, CommandService<Toe
                 .choice4(dto.getChoice4())
                 .build();
     }
+
     default OptionDto entityToDto(OptionModel entity) {
         return OptionDto.builder()
                 .id(entity.getId())
@@ -63,8 +60,6 @@ public interface ToeicService extends QueryService<ToeicDto>, CommandService<Toe
 
     Messenger save(ToeicDto dto);
 
-
     List<ToeicDto> findAllByUserId(Long userId);
-
 
 }

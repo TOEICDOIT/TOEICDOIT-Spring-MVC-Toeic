@@ -18,11 +18,11 @@ public class ToeicModel extends BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long level;
-    private String part; // 문제 유형
+    private String part;
     private String question;
     private String answer;
     private String description;
-    private String image; //문제 이미지
+    private String image;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
