@@ -170,7 +170,7 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
             resultModel.setUpdatedAt(LocalDateTime.now());
-
+            
             // Process userAnswer
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null) {
@@ -184,11 +184,14 @@ public class ResultServiceImpl implements ResultService {
             // Save the result
             resultRepository.save(resultModel);
 
-            // Update ToeicCategoryModel's take property to true
+
             toeicCategoryModel.setTake(true);
             toeicCategoryRepository.save(toeicCategoryModel);
 
-            // Return success message
+            ResultDto updatedDto = entityToDto(resultModel);
+            updatedDto.setTake(toeicCategoryModel.isTake());
+
+
             return Messenger.builder()
                     .message("Successfully saved")
                     .state(true)

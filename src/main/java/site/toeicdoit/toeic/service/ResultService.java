@@ -29,6 +29,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .scorePart6(dto.getScorePart6())
                 .scorePart7(dto.getScorePart7())
                 .userAnswer(formattedUserAnswer)
+
                 .build();
 
     }
@@ -50,6 +51,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .userAnswer(entity.getUserAnswer())
+                .take(entity.getToeicCategoryId().isTake())
                 .toeicCategoryId(entity.getToeicCategoryId() != null ? entity.getToeicCategoryId().getId() : null)
                 .userId(entity.getUserId() != null ? entity.getUserId().getId() : null)
                 .barData(List.of(
