@@ -141,6 +141,7 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public Messenger save(ResultDto dto) {
         try {
+            log.info("Received DTO: {}", dto); // 요청 받은 데이터 로그 출력
 
             UserModel userModel = userRepository.findById(dto.getUserId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
@@ -161,19 +162,15 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setScore(String.valueOf(scoreResult.getTotalScore()));
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
-            resultModel.setUpdatedAt(dto.getUpdatedAt());
+            resultModel.setUpdatedAt(LocalDateTime.now()); // 현재 시간을 설정
 
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null && userAnswer.length() > 255) {
                 userAnswer = userAnswer.substring(0, 255);
             }
             resultModel.setUserAnswer(userAnswer);
-            Optional<ResultModel> existingResult = resultRepository.findByUserId_IdAndToeicCategoryId_IdAndId(
-                    userModel.getId(), toeicCategoryModel.getId(), resultModel.getId());
 
             resultRepository.save(resultModel);
-
-            ResultModel savedResult = resultRepository.save(resultModel);
 
             return Messenger.builder()
                     .message("Successfully saved")
@@ -191,6 +188,7 @@ public class ResultServiceImpl implements ResultService {
                     .build();
         }
     }
+
 
     private ScoreResult calculateScore(List<ResultDto.ResultDataDto> resultData) {
         int totalScore = 0;
