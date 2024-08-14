@@ -67,9 +67,9 @@ public class ToeicController {
         return ResponseEntity.ok(results);
     }
 
-    @GetMapping("/exam/user/score/{userId}")
-    public ResponseEntity<List<Object[]>> findScoreByUserId(@PathVariable Long userId) {
-        List<Object[]> scores = resultService.findScoreByUserId(userId);
+    @GetMapping("/exam/user/score/{userId}/{categoryId}")
+    public ResponseEntity<List<Object[]>> findScoreByUserId(@PathVariable Long userId,@PathVariable Long categoryId) {
+        List<Object[]> scores = resultService.findScoreByUserId(userId,categoryId);
         return ResponseEntity.ok(scores);
     }
 

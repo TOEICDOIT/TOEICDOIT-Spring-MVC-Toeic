@@ -13,6 +13,8 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
         String formattedUserAnswer = dto.getData().stream()
                 .map(ResultDto.ResultDataDto::toString)
                 .collect(Collectors.joining(", "));
+
+
         return ResultModel.builder()
 
                 .timeElapsed(dto.getTimeElapsed())
@@ -50,9 +52,18 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .userAnswer(entity.getUserAnswer())
                 .toeicCategoryId(entity.getToeicCategoryId() != null ? entity.getToeicCategoryId().getId() : null)
                 .userId(entity.getUserId() != null ? entity.getUserId().getId() : null)
-                .barData(List.of(entity.getScorePart1(), entity.getScorePart2(), entity.getScorePart3(), entity.getScorePart4(), entity.getScorePart5(), entity.getScorePart6(), entity.getScorePart7()))
+                .barData(List.of(
+                        entity.getScorePart1(),
+                        entity.getScorePart2(),
+                        entity.getScorePart3(),
+                        entity.getScorePart4(),
+                        entity.getScorePart5(),
+                        entity.getScorePart6(),
+                        entity.getScorePart7()
+                ))
                 .build();
     }
+
 
     Messenger saveFromJson(String jsonData);
 
@@ -74,7 +85,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
 
     List<ResultDto> findByUserId(Long userId);
 
-    List<Object[]> findScoreByUserId(Long userId);
+    List<Object[]> findScoreByUserId(Long userId, Long categoryId);
 
     Messenger getRecentResults(Long userId);
 

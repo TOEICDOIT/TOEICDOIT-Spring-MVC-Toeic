@@ -75,9 +75,11 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
-    public List<Object[]> findScoreByUserId(Long userId) {
-        return resultRepository.findScoreByUserId(userId);
+    public List<Object[]> findScoreByUserId(Long userId, Long categoryId) {
+        return resultRepository.findByUserIdAndToeicCategoryId(userId, categoryId);
     }
+
+
 
     @Override
     public Messenger getRecentResults(Long userId) {
@@ -144,7 +146,6 @@ public class ResultServiceImpl implements ResultService {
                     .orElseThrow(() -> new RuntimeException("ToeicCategory not found"));
 
             ScoreResult scoreResult = calculateScore(dto.getData());
-
             ResultModel resultModel = dtoToEntity(dto);
             resultModel.setUserId(userModel);
             resultModel.setScorePart1(String.valueOf(scoreResult.part1Score));
@@ -160,7 +161,6 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
             resultModel.setUpdatedAt(LocalDateTime.now());
 
-
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null && userAnswer.length() > 255) {
                 userAnswer = userAnswer.substring(0, 255);
@@ -169,10 +169,7 @@ public class ResultServiceImpl implements ResultService {
             Optional<ResultModel> existingResult = resultRepository.findByUserId_IdAndToeicCategoryId_IdAndId(
                     userModel.getId(), toeicCategoryModel.getId(), resultModel.getId());
 
-
             resultRepository.save(resultModel);
-
-
 
             ResultModel savedResult = resultRepository.save(resultModel);
 
