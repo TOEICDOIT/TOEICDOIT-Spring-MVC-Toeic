@@ -160,7 +160,7 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setScore(String.valueOf(scoreResult.getTotalScore()));
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
-            resultModel.setUpdatedAt(LocalDateTime.now()); // 현재 시간을 설정
+            resultModel.setUpdatedAt(LocalDateTime.now());
 
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null && userAnswer.length() > 255) {
@@ -202,7 +202,6 @@ public class ResultServiceImpl implements ResultService {
         for (ResultDto.ResultDataDto data : resultData) {
             Optional<ToeicModel> toeicModel = toeicRepository.findById(data.getToeicId());
             if (toeicModel.isPresent()) {
-                // Convert the answer from the model and the data to uppercase before comparison
                 String correctAnswer = toeicModel.get().getAnswer().toUpperCase();
                 String userAnswer = data.getAnswer().toUpperCase();
 
