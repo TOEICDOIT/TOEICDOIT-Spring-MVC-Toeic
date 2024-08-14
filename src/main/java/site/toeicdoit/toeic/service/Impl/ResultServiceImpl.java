@@ -170,7 +170,7 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
             resultModel.setUpdatedAt(LocalDateTime.now());
-            
+
             // Process userAnswer
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null) {
@@ -234,31 +234,31 @@ public class ResultServiceImpl implements ResultService {
 
                     switch (data.getPart()) {
                         case 1:
-                            part1Score += score;
+                            part1Score += score/5;
                             lcScore += score;
                             break;
                         case 2:
-                            part2Score += score;
+                            part2Score += score/5;
                             lcScore += score;
                             break;
                         case 3:
-                            part3Score += score;
+                            part3Score += score/5;
                             lcScore += score;
                             break;
                         case 4:
-                            part4Score += score;
+                            part4Score += score/5;
                             lcScore += score;
                             break;
                         case 5:
-                            part5Score += score;
+                            part5Score += score/5;
                             rcScore += score;
                             break;
                         case 6:
-                            part6Score += score;
+                            part6Score += score/5;
                             rcScore += score;
                             break;
                         case 7:
-                            part7Score += score;
+                            part7Score += score/5;
                             rcScore += score;
                             break;
                         default:
