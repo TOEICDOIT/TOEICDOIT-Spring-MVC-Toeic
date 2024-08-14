@@ -141,12 +141,21 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public Messenger save(ResultDto dto) {
         try {
+            // Log the received DTO
+            log.info("Received DTO: {}", dto);
+
+            // Fetch and validate UserModel
             UserModel userModel = userRepository.findById(dto.getUserId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Fetch and validate ToeicCategoryModel
             ToeicCategoryModel toeicCategoryModel = toeicCategoryRepository.findById(dto.getToeicCategoryId())
                     .orElseThrow(() -> new RuntimeException("ToeicCategory not found"));
 
+            // Calculate score
             ScoreResult scoreResult = calculateScore(dto.getData());
+
+            // Convert DTO to ResultModel and set additional properties
             ResultModel resultModel = dtoToEntity(dto);
             resultModel.setUserId(userModel);
             resultModel.setScorePart1(String.valueOf(scoreResult.part1Score));
@@ -162,14 +171,24 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
             resultModel.setUpdatedAt(LocalDateTime.now());
 
+            // Process userAnswer
             String userAnswer = dto.getUserAnswer();
-            if (userAnswer != null && userAnswer.length() > 255) {
-                userAnswer = userAnswer.substring(0, 255);
+            if (userAnswer != null) {
+                userAnswer = userAnswer.toUpperCase(); // Convert to uppercase
+                if (userAnswer.length() > 255) {
+                    userAnswer = userAnswer.substring(0, 255); // Truncate if necessary
+                }
             }
             resultModel.setUserAnswer(userAnswer);
 
+            // Save the result
             resultRepository.save(resultModel);
 
+            // Update ToeicCategoryModel's take property to true
+            toeicCategoryModel.setTake(true);
+            toeicCategoryRepository.save(toeicCategoryModel);
+
+            // Return success message
             return Messenger.builder()
                     .message("Successfully saved")
                     .state(true)
@@ -177,7 +196,7 @@ public class ResultServiceImpl implements ResultService {
                     .build();
         } catch (RuntimeException e) {
             log.error("Runtime exception: ", e);
-            throw e;
+            throw e; // Re-throwing the exception for proper handling
         } catch (Exception e) {
             log.error("Error saving ResultDto: ", e);
             return Messenger.builder()
@@ -186,6 +205,7 @@ public class ResultServiceImpl implements ResultService {
                     .build();
         }
     }
+
 
     private ScoreResult calculateScore(List<ResultDto.ResultDataDto> resultData) {
         int totalScore = 0;

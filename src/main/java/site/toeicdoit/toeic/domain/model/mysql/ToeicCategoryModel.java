@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 @Entity
 @ToString(exclude = {"id"})
 public class ToeicCategoryModel extends BaseModel {
