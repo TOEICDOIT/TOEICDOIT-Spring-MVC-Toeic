@@ -2879,3 +2879,36 @@ INSERT INTO option_model (id, toeic_id, choice1, choice2, choice3, choice4, crea
 VALUES (499, 499, '(A) In next months newsletter ', '(B) At the annual science fair ', '(C) During a lecture at the college ', '(D) At the opening of a new exhibit', NOW(), NOW());
 INSERT INTO option_model (id, toeic_id, choice1, choice2, choice3, choice4, created_at, updated_at)
 VALUES (500, 500, '(A) The start time ', '(B) The chairperson ', '(C) The discussion topics ', '(D) The location  ', NOW(), NOW());
+
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (1,false,1,now(),now(),1,0,0,100,10,20,30,40,50,60,70,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (2,false,1,now(),now(),1,0,0,111,20,60,90,80,90,65,70,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (3,false,2,now(),now(),1,0,0,200,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (4,false,2,now(),now(),1,0,0,222,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (5,false,3,now(),now(),1,0,0,300,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (6,false,3,now(),now(),1,0,0,333,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (7,false,4,now(),now(),1,0,0,400,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (8,false,4,now(),now(),1,0,0,444,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (9,false,1,now(),now(),1,0,0,500,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (10,false,1,now(),now(),1,0,0,555,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (11,false,1,now(),now(),1,0,0,600,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (12,false,1,now(),now(),1,0,0,666,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (13,false,1,now(),now(),1,0,0,700,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (14,false,1,now(),now(),1,0,0,777,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (15,false,1,now(),now(),1,0,0,800,0,0,0,0,0,0,0,0,'');
+insert into result_model (id,is_correct, category_id, created_at, updated_at, user_id, lc_score, rc_score, score, score_part1, score_part2, score_part3, score_part4, score_part5, score_part6, score_part7,time_elapsed,user_answer)
+values (16,false,1,now(),now(),1,0,0,888,0,0,0,0,0,0,0,0,'');
