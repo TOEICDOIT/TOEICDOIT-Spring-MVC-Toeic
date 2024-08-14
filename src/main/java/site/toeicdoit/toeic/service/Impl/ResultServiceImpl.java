@@ -141,8 +141,6 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public Messenger save(ResultDto dto) {
         try {
-            log.info("Received DTO: {}", dto); // 요청 받은 데이터 로그 출력
-
             UserModel userModel = userRepository.findById(dto.getUserId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
             ToeicCategoryModel toeicCategoryModel = toeicCategoryRepository.findById(dto.getToeicCategoryId())
@@ -189,7 +187,6 @@ public class ResultServiceImpl implements ResultService {
         }
     }
 
-
     private ScoreResult calculateScore(List<ResultDto.ResultDataDto> resultData) {
         int totalScore = 0;
         int lcScore = 0;
@@ -202,51 +199,56 @@ public class ResultServiceImpl implements ResultService {
         int part6Score = 0;
         int part7Score = 0;
 
-
         for (ResultDto.ResultDataDto data : resultData) {
             Optional<ToeicModel> toeicModel = toeicRepository.findById(data.getToeicId());
-            if (toeicModel.isPresent() && toeicModel.get().getAnswer().equals(data.getAnswer())) {
-                int score = 5;
-                totalScore += score;
+            if (toeicModel.isPresent()) {
+                // Convert the answer from the model and the data to uppercase before comparison
+                String correctAnswer = toeicModel.get().getAnswer().toUpperCase();
+                String userAnswer = data.getAnswer().toUpperCase();
 
-                switch (data.getPart()) {
-                    case 1:
-                        part1Score += score;
-                        lcScore += score;
-                        break;
-                    case 2:
-                        part2Score += score;
-                        lcScore += score;
-                        break;
-                    case 3:
-                        part3Score += score;
-                        lcScore += score;
-                        break;
-                    case 4:
-                        part4Score += score;
-                        lcScore += score;
-                        break;
-                    case 5:
-                        part5Score += score;
-                        rcScore += score;
-                        break;
-                    case 6:
-                        part6Score += score;
-                        rcScore += score;
-                        break;
-                    case 7:
-                        part7Score += score;
-                        rcScore += score;
-                        break;
-                    default:
-                        break;
+                if (correctAnswer.equals(userAnswer)) {
+                    int score = 5;
+                    totalScore += score;
+
+                    switch (data.getPart()) {
+                        case 1:
+                            part1Score += score;
+                            lcScore += score;
+                            break;
+                        case 2:
+                            part2Score += score;
+                            lcScore += score;
+                            break;
+                        case 3:
+                            part3Score += score;
+                            lcScore += score;
+                            break;
+                        case 4:
+                            part4Score += score;
+                            lcScore += score;
+                            break;
+                        case 5:
+                            part5Score += score;
+                            rcScore += score;
+                            break;
+                        case 6:
+                            part6Score += score;
+                            rcScore += score;
+                            break;
+                        case 7:
+                            part7Score += score;
+                            rcScore += score;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-
         }
 
         return new ScoreResult(totalScore, lcScore, rcScore, part1Score, part2Score, part3Score, part4Score, part5Score, part6Score, part7Score);
     }
+
 
     @Override
     public Messenger deleteById(Long id) {
