@@ -29,6 +29,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .scorePart6(dto.getScorePart6())
                 .scorePart7(dto.getScorePart7())
                 .userAnswer(formattedUserAnswer)
+
                 .build();
 
     }

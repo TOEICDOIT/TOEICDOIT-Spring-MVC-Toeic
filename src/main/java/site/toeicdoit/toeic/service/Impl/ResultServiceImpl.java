@@ -21,6 +21,7 @@ import site.toeicdoit.toeic.repository.UserRepository;
 import site.toeicdoit.toeic.service.ResultService;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -140,6 +141,7 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public Messenger save(ResultDto dto) {
         try {
+
             UserModel userModel = userRepository.findById(dto.getUserId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
             ToeicCategoryModel toeicCategoryModel = toeicCategoryRepository.findById(dto.getToeicCategoryId())
@@ -159,7 +161,7 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setScore(String.valueOf(scoreResult.getTotalScore()));
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
-            resultModel.setUpdatedAt(LocalDateTime.now());
+            resultModel.setUpdatedAt(dto.getUpdatedAt());
 
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null && userAnswer.length() > 255) {
