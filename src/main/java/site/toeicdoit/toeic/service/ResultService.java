@@ -16,7 +16,7 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
 
 
         return ResultModel.builder()
-
+                .id(dto.getId())
                 .timeElapsed(dto.getTimeElapsed())
                 .score(dto.getScore())
                 .rcScore(dto.getRcScore())
@@ -29,7 +29,6 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                 .scorePart6(dto.getScorePart6())
                 .scorePart7(dto.getScorePart7())
                 .userAnswer(formattedUserAnswer)
-
                 .build();
 
     }
