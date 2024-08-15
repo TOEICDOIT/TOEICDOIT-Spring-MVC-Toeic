@@ -1,7 +1,7 @@
 package site.toeicdoit.toeic.domain.model.mysql;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +11,7 @@ import lombok.*;
 @Getter
 @Entity
 @ToString(exclude = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id") // 추가된 부분
 public class ToeicModel extends BaseModel {
 
     @Id
@@ -24,13 +25,10 @@ public class ToeicModel extends BaseModel {
     private String description;
     private String image;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "toeicCategory_id")
-    @JsonBackReference
     private ToeicCategoryModel toeicCategoryId;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "toeicId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private OptionModel optionId;
 }

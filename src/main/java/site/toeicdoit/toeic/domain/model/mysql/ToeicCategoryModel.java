@@ -1,6 +1,7 @@
 package site.toeicdoit.toeic.domain.model.mysql;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @ToString(exclude = {"id"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ToeicCategoryModel extends BaseModel {
 
     @Id
@@ -24,13 +26,9 @@ public class ToeicCategoryModel extends BaseModel {
     private String testType;
     private boolean take;
 
-    @OneToMany(mappedBy = "toeicCategoryId", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "toeicCategoryId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ToeicModel> toeicIds;
 
-    @OneToMany(mappedBy = "toeicCategoryId", fetch = FetchType.LAZY,cascade =  CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "toeicCategoryId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ResultModel> resultIds;
-
-
-
 }

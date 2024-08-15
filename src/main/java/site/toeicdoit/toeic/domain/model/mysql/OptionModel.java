@@ -2,6 +2,8 @@ package site.toeicdoit.toeic.domain.model.mysql;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +13,7 @@ import lombok.*;
 @Getter
 @Entity
 @ToString(exclude = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class OptionModel extends BaseModel {
     @Id
     @Column(name = "id", nullable = false)
@@ -23,7 +26,6 @@ public class OptionModel extends BaseModel {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "toeic_id")
-    @JsonBackReference
     private ToeicModel toeicId;
 
 }

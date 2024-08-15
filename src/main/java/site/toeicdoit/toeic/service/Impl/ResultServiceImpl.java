@@ -185,11 +185,11 @@ public class ResultServiceImpl implements ResultService {
             // Save the result
             resultRepository.save(resultModel); // Auditing이 작동하여 createdAt, updatedAt 자동 설정
 
-//            toeicCategoryModel.setTake(true);
-//            toeicCategoryRepository.save(toeicCategoryModel);
-//
-//            ResultDto updatedDto = entityToDto(resultModel);
-//            updatedDto.setTake(toeicCategoryModel.isTake());
+            toeicCategoryModel.setTake(true);
+            toeicCategoryRepository.save(toeicCategoryModel);
+
+            ResultDto updatedDto = entityToDto(resultModel);
+            updatedDto.setTake(toeicCategoryModel.isTake());
 
             return Messenger.builder()
                     .message("Successfully saved")
