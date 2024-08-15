@@ -171,6 +171,7 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
             resultModel.setUpdatedAt(LocalDateTime.now());
 
+
             // Process userAnswer
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null) {
@@ -182,15 +183,13 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setUserAnswer(userAnswer);
 
             // Save the result
-            resultRepository.save(resultModel);
+            resultRepository.save(resultModel); // Auditing이 작동하여 createdAt, updatedAt 자동 설정
 
-
-            toeicCategoryModel.setTake(true);
-            toeicCategoryRepository.save(toeicCategoryModel);
-
-            ResultDto updatedDto = entityToDto(resultModel);
-            updatedDto.setTake(toeicCategoryModel.isTake());
-
+//            toeicCategoryModel.setTake(true);
+//            toeicCategoryRepository.save(toeicCategoryModel);
+//
+//            ResultDto updatedDto = entityToDto(resultModel);
+//            updatedDto.setTake(toeicCategoryModel.isTake());
 
             return Messenger.builder()
                     .message("Successfully saved")
@@ -208,6 +207,7 @@ public class ResultServiceImpl implements ResultService {
                     .build();
         }
     }
+
 
 
     private ScoreResult calculateScore(List<ResultDto.ResultDataDto> resultData) {

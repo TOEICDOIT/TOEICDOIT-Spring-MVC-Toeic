@@ -1,6 +1,4 @@
 insert into user_model (id,email, password, profile, name, phone, toeic_level, registration, created_at, updated_at) values (1,'eyele1@t.co', '$2a$04$GRrg/R0OhJ6FKm.klN0vDulLU59qZ5Dp6otnjrpqMFfA13qOQ2s1.', 'http://dummyimage.com/139x100.png/dddddd/000000', 'Elinore Yele', '3211114310', 2, 'LOCAL', now(), now());
-insert into user_model (id,email, password, profile, name, phone, toeic_level, registration, created_at, updated_at) values (103,'eyele1@2t.co', '$2a$04$GRrg/R0OhJ6FKm2.klN0vDulLU59qZ5Dp6otnjrpqMFfA13qOQ2s1.', 'http://dummyimage.com/139x100.png/dddddd/000000', 'Elinore Yele', '3211114310', 2, 'LOCAL', now(), now());
-
 
 INSERT INTO toeic_category_model (id,  title,take, sound, test_type, created_at, updated_at)
 VALUES (1,'',0,'https://kr.object.ncloudstorage.com/toeicdoit/%EC%9D%8C%EC%9B%90%ED%8C%8C%EC%9D%BC/%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC.mp3','exam', NOW(), NOW());
@@ -2881,4 +2879,3 @@ INSERT INTO option_model (id, toeic_id, choice1, choice2, choice3, choice4, crea
 VALUES (499, 499, '(A) In next months newsletter ', '(B) At the annual science fair ', '(C) During a lecture at the college ', '(D) At the opening of a new exhibit', NOW(), NOW());
 INSERT INTO option_model (id, toeic_id, choice1, choice2, choice3, choice4, created_at, updated_at)
 VALUES (500, 500, '(A) The start time ', '(B) The chairperson ', '(C) The discussion topics ', '(D) The location  ', NOW(), NOW());
-
