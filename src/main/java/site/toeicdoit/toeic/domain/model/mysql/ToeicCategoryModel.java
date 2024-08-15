@@ -25,6 +25,7 @@ public class ToeicCategoryModel extends BaseModel {
     private boolean take;
 
     @OneToMany(mappedBy = "toeicCategoryId", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<ToeicModel> toeicIds;
 
     @OneToMany(mappedBy = "toeicCategoryId", fetch = FetchType.LAZY,cascade =  CascadeType.ALL, orphanRemoval = true)
