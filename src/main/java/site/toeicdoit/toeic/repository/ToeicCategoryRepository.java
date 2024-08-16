@@ -18,10 +18,10 @@ public interface ToeicCategoryRepository extends JpaRepository<ToeicCategoryMode
     @Query("select tcm from ToeicCategoryModel tcm where tcm.testType = 'test'")
     List<ToeicCategoryModel> findAllByTest();
 
-    @Query("select tcm from ToeicCategoryModel tcm join tcm.toeicIds tm where tcm.testType = 'level' and tm.level = :level")
+    @Query("select tcm from ToeicCategoryModel tcm join tcm.toeicIds tm where tm.toeicCategoryId.testType = 'level' and tm.level = :level")
     List<ToeicCategoryModel> findAllByLevel(@Param("level") Long level);
 
-    @Query("select tcm from ToeicCategoryModel tcm join tcm.toeicIds tm where tcm.testType = 'part' and tm.part = :part")
+    @Query("select tcm from ToeicCategoryModel tcm join tcm.toeicIds tm where tm.toeicCategoryId.testType = 'part' and tm.part = :part")
     List<ToeicCategoryModel> findAllByPart(@Param("part") String part);
 
 

@@ -1,5 +1,6 @@
 package site.toeicdoit.toeic.domain.model.mysql;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -30,5 +31,6 @@ public class ToeicCategoryModel extends BaseModel {
     private List<ToeicModel> toeicIds;
 
     @OneToMany(mappedBy = "toeicCategoryId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<ResultModel> resultIds;
 }
