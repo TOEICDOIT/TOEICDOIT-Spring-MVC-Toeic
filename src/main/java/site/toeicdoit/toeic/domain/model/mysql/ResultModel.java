@@ -1,7 +1,5 @@
 package site.toeicdoit.toeic.domain.model.mysql;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +12,6 @@ import java.util.List;
 @Setter
 @Entity
 @ToString(exclude = {"id"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ResultModel extends BaseModel {
 
     @Id
