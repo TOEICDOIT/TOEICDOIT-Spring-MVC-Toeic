@@ -32,33 +32,11 @@ public class ToeicController {
     }
 
     @GetMapping("/test")
-    public ResponseEntity<?> getAllToeicCategoryByTest() {
-        try {
-            List<ToeicCategoryModel> categories = toeicCategoryService.findAllByTest();
-            return ResponseEntity.ok(categories);
-        } catch (Exception e) {
-            // 예외를 로그로 기록합니다.
-            e.printStackTrace();
-
-            // 예외를 처리하여 적절한 응답을 반환합니다.
-            ErrorResponse errorResponse = new ErrorResponse(
-                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    "An unexpected error occurred: " + e.getMessage()
-            );
-
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<List<ToeicCategoryModel>> getAllToeicCategoryByTest() {
+        List<ToeicCategoryModel> categories = toeicCategoryService.findAllByTest();
+        return ResponseEntity.ok(categories);
     }
 
-    public static class ErrorResponse {
-        private int status;
-        private String message;
-
-        public ErrorResponse(int status, String message) {
-            this.status = status;
-            this.message = message;
-        }
-}
     @GetMapping("/level/{level}")
     public ResponseEntity<List<ToeicCategoryModel>> findByLevel(@PathVariable Long level) {
         List<ToeicCategoryModel> categories = toeicCategoryService.findAllByLevel(level);
