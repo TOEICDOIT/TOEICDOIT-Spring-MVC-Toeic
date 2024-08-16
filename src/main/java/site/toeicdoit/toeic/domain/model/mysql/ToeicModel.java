@@ -11,7 +11,7 @@ import lombok.*;
 @Getter
 @Entity
 @ToString(exclude = "id")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id") // 추가된 부분
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ToeicModel extends BaseModel {
 
     @Id

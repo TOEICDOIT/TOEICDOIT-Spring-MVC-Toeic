@@ -81,7 +81,6 @@ public class ResultServiceImpl implements ResultService {
     }
 
 
-
     @Override
     public Messenger getRecentResults(Long userId) {
         List<Integer> exam = getRecentScores(userId, 1L);
@@ -141,21 +140,12 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public Messenger save(ResultDto dto) {
         try {
-            // Log the received DTO
-            log.info("Received DTO: {}", dto);
-
-            // Fetch and validate UserModel
             UserModel userModel = userRepository.findById(dto.getUserId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
-
-            // Fetch and validate ToeicCategoryModel
             ToeicCategoryModel toeicCategoryModel = toeicCategoryRepository.findById(dto.getToeicCategoryId())
                     .orElseThrow(() -> new RuntimeException("ToeicCategory not found"));
 
-            // Calculate score
             ScoreResult scoreResult = calculateScore(dto.getData());
-
-            // Convert DTO to ResultModel and set additional properties
             ResultModel resultModel = dtoToEntity(dto);
             resultModel.setUserId(userModel);
             resultModel.setScorePart1(String.valueOf(scoreResult.part1Score));
@@ -170,24 +160,17 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
             resultModel.setUpdatedAt(LocalDateTime.now());
-
-
-            // Process userAnswer
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null) {
-                userAnswer = userAnswer.toUpperCase(); // Convert to uppercase
+                userAnswer = userAnswer.toUpperCase();
                 if (userAnswer.length() > 255) {
-                    userAnswer = userAnswer.substring(0, 255); // Truncate if necessary
+                    userAnswer = userAnswer.substring(0, 255);
                 }
             }
             resultModel.setUserAnswer(userAnswer);
-
-            // Save the result
-            resultRepository.save(resultModel); // Auditing이 작동하여 createdAt, updatedAt 자동 설정
-
+            resultRepository.save(resultModel);
             toeicCategoryModel.setTake(true);
             toeicCategoryRepository.save(toeicCategoryModel);
-
             ResultDto updatedDto = entityToDto(resultModel);
             updatedDto.setTake(toeicCategoryModel.isTake());
 
@@ -198,7 +181,7 @@ public class ResultServiceImpl implements ResultService {
                     .build();
         } catch (RuntimeException e) {
             log.error("Runtime exception: ", e);
-            throw e; // Re-throwing the exception for proper handling
+            throw e;
         } catch (Exception e) {
             log.error("Error saving ResultDto: ", e);
             return Messenger.builder()
@@ -207,8 +190,6 @@ public class ResultServiceImpl implements ResultService {
                     .build();
         }
     }
-
-
 
     private ScoreResult calculateScore(List<ResultDto.ResultDataDto> resultData) {
         int totalScore = 0;
@@ -234,31 +215,31 @@ public class ResultServiceImpl implements ResultService {
 
                     switch (data.getPart()) {
                         case 1:
-                            part1Score += score/5;
+                            part1Score += score / 5;
                             lcScore += score;
                             break;
                         case 2:
-                            part2Score += score/5;
+                            part2Score += score / 5;
                             lcScore += score;
                             break;
                         case 3:
-                            part3Score += score/5;
+                            part3Score += score / 5;
                             lcScore += score;
                             break;
                         case 4:
-                            part4Score += score/5;
+                            part4Score += score / 5;
                             lcScore += score;
                             break;
                         case 5:
-                            part5Score += score/5;
+                            part5Score += score / 5;
                             rcScore += score;
                             break;
                         case 6:
-                            part6Score += score/5;
+                            part6Score += score / 5;
                             rcScore += score;
                             break;
                         case 7:
-                            part7Score += score/5;
+                            part7Score += score / 5;
                             rcScore += score;
                             break;
                         default:
@@ -267,7 +248,6 @@ public class ResultServiceImpl implements ResultService {
                 }
             }
         }
-
         return new ScoreResult(totalScore, lcScore, rcScore, part1Score, part2Score, part3Score, part4Score, part5Score, part6Score, part7Score);
     }
 

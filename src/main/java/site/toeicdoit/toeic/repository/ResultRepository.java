@@ -26,7 +26,6 @@ public interface ResultRepository extends JpaRepository<ResultModel, Long> {
     @Query("select rm.updatedAt, rm.score from ResultModel rm where rm.userId.id = :userId and rm.toeicCategoryId.id = :categoryId")
     List<Object[]> findByUserIdAndToeicCategoryId(@Param("userId") Long userId, @Param("categoryId") Long categoryId);
 
-
     List<ResultModel> findByUserId(UserModel userId, Pageable pageable);
 
     @Query("SELECT r FROM ResultModel r WHERE r.userId.id = :userId AND r.toeicCategoryId.id = :categoryId")
