@@ -24,8 +24,5 @@ public class ToeicCategoryDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private List<ToeicCategoryDto> toeicQuestions;
-
-
-
+    private List<ToeicDto> toeicQuestions;
 }

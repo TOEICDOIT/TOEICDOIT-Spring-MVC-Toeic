@@ -15,7 +15,6 @@ import java.util.List;
 @Setter
 @Entity
 @ToString(exclude = {"id"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ToeicCategoryModel extends BaseModel {
 
     @Id
@@ -31,6 +30,5 @@ public class ToeicCategoryModel extends BaseModel {
     private List<ToeicModel> toeicIds;
 
     @OneToMany(mappedBy = "toeicCategoryId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
     private List<ResultModel> resultIds;
 }
