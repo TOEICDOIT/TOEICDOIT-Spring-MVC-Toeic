@@ -144,7 +144,10 @@ public class ResultServiceImpl implements ResultService {
             ToeicCategoryModel toeicCategoryModel = toeicCategoryRepository.findById(dto.getToeicCategoryId())
                     .orElseThrow(() -> new RuntimeException("ToeicCategory not found"));
 
+            // 결과를 계산
             ScoreResult scoreResult = calculateScore(dto.getData());
+
+            // ResultModel을 DTO에서 변환
             ResultModel resultModel = dtoToEntity(dto);
             resultModel.setUserId(userModel);
             resultModel.setScorePart1(String.valueOf(scoreResult.part1Score));
@@ -159,6 +162,8 @@ public class ResultServiceImpl implements ResultService {
             resultModel.setLcScore(String.valueOf(scoreResult.getLcScore()));
             resultModel.setRcScore(String.valueOf(scoreResult.getRcScore()));
             resultModel.setUpdatedAt(LocalDateTime.now());
+
+            // 사용자 답안 처리
             String userAnswer = dto.getUserAnswer();
             if (userAnswer != null) {
                 userAnswer = userAnswer.toUpperCase();
@@ -167,17 +172,33 @@ public class ResultServiceImpl implements ResultService {
                 }
             }
             resultModel.setUserAnswer(userAnswer);
+
+            // 결과 저장
             resultRepository.save(resultModel);
+
+            // ToeicCategory 업데이트
             toeicCategoryModel.setTake(true);
             toeicCategoryRepository.save(toeicCategoryModel);
 
+            // 각 파트별 문제 수 계산
+            Map<Integer, Long> partQuestionCounts = dto.getData().stream()
+                    .collect(Collectors.groupingBy(ResultDto.ResultDataDto::getPart, Collectors.counting()));
 
-            int numberOfQuestions = dto.getData().size();
-            int allScore = numberOfQuestions * 5;
+            int lcAllScore = partQuestionCounts.entrySet().stream()
+                    .filter(entry -> entry.getKey() >= 1 && entry.getKey() <= 4)
+                    .mapToInt(entry -> (int) (entry.getValue() * 5))
+                    .sum();
+
+            int rcAllScore = partQuestionCounts.entrySet().stream()
+                    .filter(entry -> entry.getKey() >= 5 && entry.getKey() <= 7)
+                    .mapToInt(entry -> (int) (entry.getValue() * 5))
+                    .sum();
+
 
             ResultDto updatedDto = entityToDto(resultModel);
             updatedDto.setTake(toeicCategoryModel.isTake());
-            updatedDto.setAllScore(String.valueOf(allScore));
+            updatedDto.setLcAllScore(String.valueOf(lcAllScore));
+            updatedDto.setRcAllScore(String.valueOf(rcAllScore));
 
             return Messenger.builder()
                     .message("Successfully saved")
@@ -195,6 +216,7 @@ public class ResultServiceImpl implements ResultService {
                     .build();
         }
     }
+
 
     private ScoreResult calculateScore(List<ResultDto.ResultDataDto> resultData) {
         int totalScore = 0;

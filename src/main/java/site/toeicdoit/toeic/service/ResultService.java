@@ -62,7 +62,8 @@ public interface ResultService extends QueryService<ResultDto>, CommandService<R
                         entity.getScorePart6(),
                         entity.getScorePart7()
                 ))
-                .allScore(entity.getScore())
+                .lcAllScore(entity.getScore())
+                .rcAllScore(entity.getScore())
                 .build();
     }
 
