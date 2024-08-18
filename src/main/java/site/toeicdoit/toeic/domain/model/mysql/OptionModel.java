@@ -14,7 +14,6 @@ import lombok.*;
 @Getter
 @Entity
 @ToString(exclude = "id")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class OptionModel extends BaseModel {
     @Id
     @Column(name = "id", nullable = false)

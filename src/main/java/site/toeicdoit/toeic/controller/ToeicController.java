@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import site.toeicdoit.toeic.domain.dto.ResultDto;
+import site.toeicdoit.toeic.domain.dto.ToeicDto;
 import site.toeicdoit.toeic.domain.model.mysql.ToeicCategoryModel;
+import site.toeicdoit.toeic.domain.model.mysql.ToeicModel;
 import site.toeicdoit.toeic.domain.vo.Messenger;
 import site.toeicdoit.toeic.service.ResultService;
 import site.toeicdoit.toeic.service.ToeicCategoryService;
@@ -26,26 +28,25 @@ public class ToeicController {
     private final ToeicService toeicService;
 
     @GetMapping("/exam")
-    public ResponseEntity<List<ToeicCategoryModel>> getAllToeicCategoryByExam() {
-        List<ToeicCategoryModel> categories = toeicCategoryService.findAllByExam();
+    public ResponseEntity<List<ToeicDto>> getAllToeicCategoryByExam() {
+        List<ToeicDto> categories = toeicService.findAllByExam();
         return ResponseEntity.ok(categories);
     }
-
     @GetMapping("/test")
-    public ResponseEntity<List<ToeicCategoryModel>> getAllToeicCategoryByTest() {
-        List<ToeicCategoryModel> categories = toeicCategoryService.findAllByTest();
+    public ResponseEntity<List<ToeicDto>> getAllToeicCategoryByTest() {
+        List<ToeicDto> categories = toeicService.findAllByTest();
         return ResponseEntity.ok(categories);
     }
 
     @GetMapping("/level/{level}")
-    public ResponseEntity<List<ToeicCategoryModel>> findByLevel(@PathVariable Long level) {
-        List<ToeicCategoryModel> categories = toeicCategoryService.findAllByLevel(level);
+    public ResponseEntity<List<ToeicDto>> findByLevel(@PathVariable Long level) {
+        List<ToeicDto> categories = toeicService.findAllByLevel(level);
         return ResponseEntity.ok(categories);
     }
 
     @GetMapping("/part/{part}")
-    public ResponseEntity<List<ToeicCategoryModel>> findByPart(@PathVariable String part) {
-        List<ToeicCategoryModel> categories = toeicCategoryService.findAllByPart(part);
+    public ResponseEntity<List<ToeicDto>> findByPart(@PathVariable String part) {
+        List<ToeicDto> categories = toeicService.findAllByPart(part);
         return ResponseEntity.ok(categories);
     }
 
