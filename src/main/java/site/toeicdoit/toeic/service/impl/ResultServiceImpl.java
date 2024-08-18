@@ -184,15 +184,33 @@ public class ResultServiceImpl implements ResultService {
             Map<Integer, Long> partQuestionCounts = dto.getData().stream()
                     .collect(Collectors.groupingBy(ResultDto.ResultDataDto::getPart, Collectors.counting()));
 
-            int lcAllScore = partQuestionCounts.entrySet().stream()
-                    .filter(entry -> entry.getKey() >= 1 && entry.getKey() <= 4)
-                    .mapToInt(entry -> (int) (entry.getValue() * 5))
-                    .sum();
+            int lcAllScore = 0;
+            int rcAllScore = 0;
 
-            int rcAllScore = partQuestionCounts.entrySet().stream()
-                    .filter(entry -> entry.getKey() >= 5 && entry.getKey() <= 7)
-                    .mapToInt(entry -> (int) (entry.getValue() * 5))
-                    .sum();
+            if (toeicCategoryModel.getId() == 1) {
+                lcAllScore = 495;
+                rcAllScore = 495;
+            } else if (toeicCategoryModel.getId() == 2) {
+                lcAllScore = 50;
+                rcAllScore = 50;
+            } else if (toeicCategoryModel.getId() == 3) {
+                lcAllScore = 50;
+                rcAllScore = 50;
+            } else if (toeicCategoryModel.getId() == 4) {
+                lcAllScore = 50;
+                rcAllScore = 50;
+            } else {
+                // 기본 계산 방법
+                lcAllScore = partQuestionCounts.entrySet().stream()
+                        .filter(entry -> entry.getKey() >= 1 && entry.getKey() <= 4)
+                        .mapToInt(entry -> (int) (entry.getValue() * 5))
+                        .sum();
+
+                rcAllScore = partQuestionCounts.entrySet().stream()
+                        .filter(entry -> entry.getKey() >= 5 && entry.getKey() <= 7)
+                        .mapToInt(entry -> (int) (entry.getValue() * 5))
+                        .sum();
+            }
 
 
             ResultDto updatedDto = entityToDto(resultModel);
