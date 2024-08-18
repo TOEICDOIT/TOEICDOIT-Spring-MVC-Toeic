@@ -1,7 +1,8 @@
-package site.toeicdoit.toeic.service.Impl;
+package site.toeicdoit.toeic.service.impl;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +22,6 @@ import site.toeicdoit.toeic.repository.UserRepository;
 import site.toeicdoit.toeic.service.ResultService;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -136,7 +136,6 @@ public class ResultServiceImpl implements ResultService {
                     .build();
         }
     }
-
     @Override
     public Messenger save(ResultDto dto) {
         try {
@@ -171,13 +170,19 @@ public class ResultServiceImpl implements ResultService {
             resultRepository.save(resultModel);
             toeicCategoryModel.setTake(true);
             toeicCategoryRepository.save(toeicCategoryModel);
+
+
+            int numberOfQuestions = dto.getData().size();
+            int allScore = numberOfQuestions * 5;
+
             ResultDto updatedDto = entityToDto(resultModel);
             updatedDto.setTake(toeicCategoryModel.isTake());
+            updatedDto.setAllScore(String.valueOf(allScore));
 
             return Messenger.builder()
                     .message("Successfully saved")
                     .state(true)
-                    .data(entityToDto(resultModel))
+                    .data(updatedDto)
                     .build();
         } catch (RuntimeException e) {
             log.error("Runtime exception: ", e);
@@ -252,6 +257,7 @@ public class ResultServiceImpl implements ResultService {
     }
 
 
+
     @Override
     public Messenger deleteById(Long id) {
         try {
@@ -306,8 +312,11 @@ public class ResultServiceImpl implements ResultService {
 
 
     private static class ScoreResult {
+        @Getter
         private final int totalScore;
+        @Getter
         private final int lcScore;
+        @Getter
         private final int rcScore;
         private final int part1Score;
         private final int part2Score;
@@ -329,18 +338,6 @@ public class ResultServiceImpl implements ResultService {
             this.part6Score = part6Score;
             this.part7Score = part7Score;
 
-        }
-
-        public int getTotalScore() {
-            return totalScore;
-        }
-
-        public int getLcScore() {
-            return lcScore;
-        }
-
-        public int getRcScore() {
-            return rcScore;
         }
 
 
